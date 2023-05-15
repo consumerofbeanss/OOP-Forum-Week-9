@@ -28,5 +28,13 @@ public SalesPerson(String id){
 }
 ```
 
+#### (b) Explain why accessor methods are necessary for the SalesPerson class. (3 points)
+##### Accessor methods are needed to access the attributes of private variables. This is to prevent changes made to the private variables.
+
+#### (c) (i) Construct unified modeling language (UML) diagrams to clearly show the relationship between the SalesPerson and Sales classes.
+##### Below is the UML diagram showing the relationship between classes SalesPerson and Sales
+![UML](images/UMLDiagram.png "UML Diagram")
+
+
 
 

@@ -35,6 +35,100 @@ public SalesPerson(String id){
 ##### Below is the UML diagram showing the relationship between classes SalesPerson and Sales
 ![UML](images/UMLDiagram.png "UML Diagram")
 
+#### (c) (ii) Outline a negative effect that a future change in the design of the Sales object might have on this suite of programs. (2 points)
+##### Changes made to the Sales object will not be compatible with the current program.
+
+### The company employs several sales personnel. The different salesPerson objects are held in the array salesPeople. The Driver class contains various methods that operate on the SalesPerson and Sales classes. The Driver class contains the following code:
+```
+public static void main(String[] args){
+
+SalesPerson[] salesPeople = new SalesPerson[6];
+
+salesPeople[0] = new SalesPerson("100");
+
+salesPeople[1] = new SalesPerson("101");
+
+salesPeople[2] = new SalesPerson("102");
+
+salesPeople[0].setSalesHistory(new Sales("A100",300.00,10));
+
+salesPeople[0].setSalesHistory(new Sales("A200",1000.00,2));
+
+salesPeople[1].setSalesHistory(new Sales("A300",2550.40,10));
+
+System.out.println(salesPeople[2].getId());
+
+System.out.println(salesPeople[0].getCount());
+
+System.out.println(salesPeople[1].getSalesHistory(0).getValue());
+
+System.out.println(salesPeople[0].calcTotalSales());
+
+ }
+```
+
+#### (d) State the output after running this code. (4 points)
+##### The output after running the code is: 
+```
+102
+2
+2550.4
+5000.0
+```
+
+#### (e) Construct the method calcTotalSales(), in the SalesPerson class that calculates the total value of the sales for a specific SalesPerson object. (5 points)
+
+```
+public double calcTotalSales() {
+   double total = 0;
+   for (int i = 0; i < count; i++) {
+       total += this.salesHistory[i].getValue() * this.salesHistory[i].getQuantity();
+   }
+   return total;
+}
+```
+
+### The salesPeople array contains 100 instantiated objects. The company wishes to reward the salesperson whose sales have the largest total value.
+
+#### (f) By making use of any previously written methods, construct the method highest(), that returns the ID of the salesperson whose sales have the largest total value. (5 points)
+
+```
+public static String highest(SalesPerson[] salesPeople) {
+   double highest = 0;
+   String id = "";
+   for (SalesPerson salesPerson : salesPeople) {
+       double totalSales = salesPerson.calcTotalSales();
+       if (totalSales > highest) {
+           highest = totalSales;
+           id = salesPerson.getId();
+       }
+   }
+   return id;
+}
+```
+
+#### (g) Construct the method addSales(Sales s, String id), in the Driver class, that will add a new Sales object s, to the salesperson with a specified ID.
+#### Note: You can assume that the ID is a valid one. (4 points)
+
+```
+public static void addSales(SalesPerson[] salesPeople, Sales s, String id) {
+   for (SalesPerson salesPerson : salesPeople) {
+       if (salesPerson.getId().equals(id)) {
+           salesPerson.setSalesHistory(s);
+           break;
+       }
+   }
+}
+```
+
+### A further class in this suite of programs is the Payroll class. This class is run at the end of each month to calculate each salesperson’s salary, which is based on the sales that have been made during that month.
+
+#### (h) Suggest changes that must be made to the SalesPerson class and/or the Sales class to allow these calculations to be made. (3 points)
+##### A good addition is a variable that can keep track of the date. The sales made in a certain time frame can then be calculated to decide the salary for the workers.
+#### (i) Discuss the use of polymorphism that occurs in this suite of programs. (3 points)
+##### Polymorphism occurs in the SalesPerson class which contains two constructors. This is an example of overloading.
+
+
 
 
 
